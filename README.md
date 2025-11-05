@@ -6,7 +6,7 @@ Another Chat Bot to make some fun for your players.
 
 In order to try this out you need the following software to be installed on your machine:
 
-* Java version 21 or above (e.g. [OpenJDK](https://openjdk.java.net/install/))
+* Java version 21 or above (e.g. [Oracle Java](https://www.oracle.com/java/technologies/downloads/#java21))
 * [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
 
