@@ -1,8 +1,16 @@
-name: MOBChatBot
-version: 0.1
-api-version: 1.13
+name: ${project.name}
 main: me.drendov.MOBChatBot
+authors: drendov
+version: ${project.version}
+api-version: 1.14
 
 commands:
-  enrich:
-    description: Makes you rich!
+  reload:
+    description: Reload the plugin configuration.
+    usage: /mobchatbot reload
+    permission: mobchatbot.reload
+    permission-message: You do not have permission to execute this command.
+permissions:
+    mobchatbot.admin:
+        description: Grants permission to manage the plugin.
+        default: op
