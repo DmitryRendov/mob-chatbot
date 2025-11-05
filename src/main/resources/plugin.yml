@@ -1,0 +1,8 @@
+name: MOBChatBot
+version: 0.1
+api-version: 1.13
+main: me.drendov.MOBChatBot
+
+commands:
+  enrich:
+    description: Makes you rich!
