@@ -1,16 +1,24 @@
-name: ${project.name}
-main: me.drendov.MOBChatBot
-authors: drendov
-version: ${project.version}
-api-version: 1.14
+name: MOBChatBot
+version: 0.1.0
+main: me.drendov.MOBChatBot.MOBChatBot
+api-version: 1.21
+author: drendov
+description: AI-powered chat bot for private Minecraft servers
 
 commands:
-  reload:
-    description: Reload the plugin configuration.
-    usage: /mobchatbot reload
-    permission: mobchatbot.reload
-    permission-message: You do not have permission to execute this command.
+  mobchat:
+    description: Main command for MOBChatBot
+    usage: /mobchat <message>
+    aliases: [mc, chatbot]
+  mobchatreload:
+    description: Reload the plugin configuration
+    usage: /mobchatreload
+    permission: mobchatbot.admin
+
 permissions:
-    mobchatbot.admin:
-        description: Grants permission to manage the plugin.
-        default: op
+  mobchatbot.use:
+    description: Allows players to chat with the AI bot
+    default: true
+  mobchatbot.admin:
+    description: Grants admin permissions to manage the plugin
+    default: op

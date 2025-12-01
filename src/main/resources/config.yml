@@ -1,0 +1,48 @@
+# MOBChatBot Configuration
+# AI-powered chat bot for Minecraft
+
+# AI Provider Settings
+ai:
+  # Provider type: openai, bedrock, or ollama
+  provider: "openai"
+  
+  # OpenAI Settings
+  openai:
+    api-key: "your-api-key-here"
+    model: "gpt-4"
+    max-tokens: 150
+    temperature: 0.7
+  
+  # AWS Bedrock Settings (future implementation)
+  bedrock:
+    region: "us-east-1"
+    model: "anthropic.claude-v2"
+    access-key: "your-access-key"
+    secret-key: "your-secret-key"
+  
+  # Ollama Settings (future implementation)
+  ollama:
+    endpoint: "http://localhost:11434"
+    model: "llama2"
+
+# Bot Personality and Behavior
+bot:
+  name: "MOBChat"
+  personality: "friendly and helpful"
+  system-prompt: "You are a helpful assistant in a Minecraft server. Keep responses concise and fun."
+
+# Usage Limits
+limits:
+  # Maximum tokens per conversation
+  max-tokens-per-conversation: 4000
+  # Maximum messages per player per day (0 = unlimited)
+  max-messages-per-day: 0
+  # Cooldown between messages in seconds
+  message-cooldown: 2
+
+# Messages
+messages:
+  prefix: "&5[MOBChat]&r"
+  cooldown: "Please wait {seconds} seconds before sending another message."
+  limit-reached: "You have reached your daily message limit."
+  error: "An error occurred while processing your message. Please try again."

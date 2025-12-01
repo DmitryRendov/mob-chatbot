@@ -1,27 +1,110 @@
-# Another LLM Chat Bot for your Paper/Spigot Minecraft Server
+# MOBChatBot
 
-Another Chat Bot to make some fun for your players.
+AI-powered chat bot for private Minecraft servers. Provides private conversations with AI assistants using multiple provider backends.
 
-## Prerequisites
+## Current Status: Phase 1 Complete ✅
 
-In order to try this out you need the following software to be installed on your machine:
+### Implemented Features
 
-* Java version 21 or above (e.g. [Oracle Java](https://www.oracle.com/java/technologies/downloads/#java21))
-* [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+**Core Structure:**
+- ✅ Main plugin class (`MOBChatBot`) extending JavaPlugin
+- ✅ Proper `onEnable()` and `onDisable()` lifecycle methods with logging
+- ✅ Package structure: `commands`, `config`, `ai`, `utils`
+- ✅ Maven build configuration with Spigot API 1.21.10
 
+**Files Created:**
+- `plugin.yml` - Plugin metadata (version 0.1.0, API 1.21)
+- `config.yml` - Configuration template with AI provider settings
+- `MOBChatBot.java` - Main plugin class
+- `ChatCommand.java` - Main chat command handler
+- `ReloadCommand.java` - Configuration reload command
+- `ConfigManager.java` - Configuration management (stub)
+- `AIProvider.java` - AI provider interface
+- `ConversationManager.java` - Conversation tracking (stub)
+- `MessageUtils.java` - Message formatting utilities
 
-## How to build and install the plugin
+**Commands:**
+- `/mobchat <message>` - Send message to AI bot (aliases: `/mc`, `/chatbot`)
+- `/mobchatreload` - Reload plugin configuration (admin only)
 
-Clone the template project to your system:
-````bash
-git clone https://github.com/DmitryRendov/mob-chatbot.git
-````
+**Permissions:**
+- `mobchatbot.use` - Use the chat bot (default: true)
+- `mobchatbot.admin` - Admin commands (default: op)
 
-This project uses [Maven](https://maven.apache.org/) for building. So on your command line run
+### Build Information
 
-````bash
+**Requirements:**
+- Java 21
+- Maven 3.6.3+
+- Spigot/Paper 1.21.10
+
+**Build Command:**
+```bash
 mvn clean package
-````
+```
 
-To install the plugin in your Minecraft server just copy the artifact file `target/mob-chatbot-0.1.0.jar`
-to the server's `plugin` folder.
+**Output:** `target/mob-chatbot-0.1.0.jar`
+
+**Installation:**
+Copy `mob-chatbot-0.1.0.jar` to your server's `plugins/` folder.
+
+## Planned Features
+
+### Phase 2: Configuration System
+- Implement ConfigManager
+- Load and validate config.yml
+- Hot-reload support
+- Per-player settings
+
+### Phase 3: AI Provider Implementation
+- OpenAI integration
+- AWS Bedrock support
+- Ollama local model support
+- Provider factory pattern
+
+### Phase 4: Conversation Management
+- Per-player conversation tracking
+- Message history storage
+- Token counting and limits
+- Context window management
+
+### Phase 5: Advanced Features
+- Cooldown system
+- Daily message limits
+- Cost tracking
+- Admin statistics
+- Conversation export
+
+## Configuration
+
+See `config.yml` for all available settings:
+- AI provider selection (OpenAI, Bedrock, Ollama)
+- Model parameters (temperature, max tokens)
+- Usage limits (daily messages, cooldowns)
+- Bot personality and system prompts
+
+## Development
+
+### Project Structure
+```
+src/main/java/me/drendov/MOBChatBot/
+├── MOBChatBot.java           # Main plugin class
+├── commands/                  # Command handlers
+│   ├── ChatCommand.java
+│   └── ReloadCommand.java
+├── config/                    # Configuration management
+│   └── ConfigManager.java
+├── ai/                        # AI provider implementations
+│   ├── AIProvider.java
+│   └── ConversationManager.java
+└── utils/                     # Utility classes
+    └── MessageUtils.java
+```
+
+## License
+
+TBD
+
+## Author
+
+drendov
