@@ -2,6 +2,7 @@ package me.drendov.MOBChatBot;
 
 import me.drendov.MOBChatBot.commands.ChatCommand;
 import me.drendov.MOBChatBot.commands.ReloadCommand;
+import me.drendov.MOBChatBot.config.ConfigManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -9,6 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * Provides AI-powered chat conversations for Minecraft players
  */
 public class MOBChatBot extends JavaPlugin {
+    
+    private ConfigManager configManager;
 
     @Override
     public void onEnable() {
@@ -18,7 +21,8 @@ public class MOBChatBot extends JavaPlugin {
         getLogger().info("========================================");
         
         // Initialize configuration
-        saveDefaultConfig();
+        configManager = new ConfigManager(this);
+        configManager.loadConfig();
         
         // Register commands
         registerCommands();
@@ -48,5 +52,12 @@ public class MOBChatBot extends JavaPlugin {
         getCommand("mobchat").setExecutor(new ChatCommand(this));
         getCommand("mobchatreload").setExecutor(new ReloadCommand(this));
         getLogger().info("Commands registered successfully");
+    }
+    
+    /**
+     * Get the configuration manager
+     */
+    public ConfigManager getConfigManager() {
+        return configManager;
     }
 }

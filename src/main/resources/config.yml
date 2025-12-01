@@ -2,47 +2,41 @@
 # AI-powered chat bot for Minecraft
 
 # AI Provider Settings
-ai:
-  # Provider type: openai, bedrock, or ollama
-  provider: "openai"
-  
+ai-providers:
   # OpenAI Settings
   openai:
+    enabled: true
     api-key: "your-api-key-here"
-    model: "gpt-4"
+    model: "gpt-3.5-turbo"
     max-tokens: 150
-    temperature: 0.7
   
-  # AWS Bedrock Settings (future implementation)
+  # AWS Bedrock Settings
   bedrock:
+    enabled: false
     region: "us-east-1"
-    model: "anthropic.claude-v2"
     access-key: "your-access-key"
     secret-key: "your-secret-key"
+    model: "claude-3-haiku"
   
-  # Ollama Settings (future implementation)
+  # Ollama Settings (Local LLM)
   ollama:
-    endpoint: "http://localhost:11434"
+    enabled: false
+    base-url: "http://localhost:11434"
     model: "llama2"
 
-# Bot Personality and Behavior
-bot:
-  name: "MOBChat"
-  personality: "friendly and helpful"
+# General Settings
+general:
+  max-messages-per-player: 10
+  cooldown-seconds: 5
+  # Bot personality
+  bot-name: "MOBChat"
   system-prompt: "You are a helpful assistant in a Minecraft server. Keep responses concise and fun."
-
-# Usage Limits
-limits:
-  # Maximum tokens per conversation
-  max-tokens-per-conversation: 4000
-  # Maximum messages per player per day (0 = unlimited)
-  max-messages-per-day: 0
-  # Cooldown between messages in seconds
-  message-cooldown: 2
 
 # Messages
 messages:
   prefix: "&5[MOBChat]&r"
   cooldown: "Please wait {seconds} seconds before sending another message."
-  limit-reached: "You have reached your daily message limit."
+  limit-reached: "You have reached your message limit ({limit} messages)."
   error: "An error occurred while processing your message. Please try again."
+  no-provider: "No AI provider is currently enabled. Contact an administrator."
+
