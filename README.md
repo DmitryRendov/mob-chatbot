@@ -2,26 +2,33 @@
 
 AI-powered chat bot for private Minecraft servers. Provides private conversations with AI assistants using multiple provider backends.
 
-## Current Status: Phase 1 Complete ✅
+## Current Status: Phase 2 Complete ✅
 
-### Implemented Features
-
-**Core Structure:**
+### Phase 1: Initial Plugin Structure ✅
 - ✅ Main plugin class (`MOBChatBot`) extending JavaPlugin
 - ✅ Proper `onEnable()` and `onDisable()` lifecycle methods with logging
 - ✅ Package structure: `commands`, `config`, `ai`, `utils`
 - ✅ Maven build configuration with Spigot API 1.21.10
+- ✅ Basic commands and permissions
+- ✅ Message formatting utilities
 
-**Files Created:**
-- `plugin.yml` - Plugin metadata (version 0.1.0, API 1.21)
-- `config.yml` - Configuration template with AI provider settings
-- `MOBChatBot.java` - Main plugin class
-- `ChatCommand.java` - Main chat command handler
-- `ReloadCommand.java` - Configuration reload command
-- `ConfigManager.java` - Configuration management (stub)
-- `AIProvider.java` - AI provider interface
-- `ConversationManager.java` - Conversation tracking (stub)
-- `MessageUtils.java` - Message formatting utilities
+### Phase 2: Configuration System ✅
+- ✅ **ConfigManager** - Full implementation with validation
+- ✅ **config.yml** - Structured configuration with sections:
+  - `ai-providers` - OpenAI, Bedrock, Ollama with enabled/disabled flags
+  - `general` - Max messages per player, cooldown, bot settings
+  - `messages` - Customizable message templates
+- ✅ **Auto-generation** - Default config created on first run
+- ✅ **Validation** - Configuration validation with warnings
+- ✅ **Hot-reload** - `/mobchatreload` command fully functional
+- ✅ **Getters** - Type-safe access to all configuration values
+
+**Configuration Features:**
+- OpenAI: api-key, model (gpt-3.5-turbo), max-tokens (150)
+- Bedrock: region, access-key, secret-key, model (claude-3-haiku)
+- Ollama: base-url (http://localhost:11434), model (llama2)
+- General: max-messages-per-player (10), cooldown-seconds (5)
+- Provider validation and warnings for missing credentials
 
 **Commands:**
 - `/mobchat <message>` - Send message to AI bot (aliases: `/mc`, `/chatbot`)
@@ -50,17 +57,12 @@ Copy `mob-chatbot-0.1.0.jar` to your server's `plugins/` folder.
 
 ## Planned Features
 
-### Phase 2: Configuration System
-- Implement ConfigManager
-- Load and validate config.yml
-- Hot-reload support
-- Per-player settings
-
-### Phase 3: AI Provider Implementation
-- OpenAI integration
+### Phase 3: AI Provider Implementation (Next)
+- OpenAI integration with HTTP client
 - AWS Bedrock support
 - Ollama local model support
 - Provider factory pattern
+- Error handling and retry logic
 
 ### Phase 4: Conversation Management
 - Per-player conversation tracking
@@ -69,8 +71,9 @@ Copy `mob-chatbot-0.1.0.jar` to your server's `plugins/` folder.
 - Context window management
 
 ### Phase 5: Advanced Features
-- Cooldown system
-- Daily message limits
+- Cooldown system (track last message time)
+- Daily message limits (reset at midnight)
+- Cost tracking
 - Cost tracking
 - Admin statistics
 - Conversation export
@@ -107,4 +110,4 @@ TBD
 
 ## Author
 
-drendov
+Dmitry Rendov powered by Copilot

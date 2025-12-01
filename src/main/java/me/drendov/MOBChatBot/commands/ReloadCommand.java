@@ -30,14 +30,30 @@ public class ReloadCommand implements CommandExecutor {
             return true;
         }
         
-        // TODO: Reload configuration
-        // TODO: Reload AI providers
-        
-        String message = "Configuration reloaded successfully!";
-        if (sender instanceof Player) {
-            MessageUtils.sendSuccess((Player) sender, message);
-        } else {
-            sender.sendMessage(message);
+        try {
+            // Reload configuration
+            plugin.getConfigManager().reloadConfig();
+            
+            String message = "Configuration reloaded successfully!";
+            if (sender instanceof Player) {
+                MessageUtils.sendSuccess((Player) sender, message);
+            } else {
+                sender.sendMessage(message);
+            }
+            
+            // Log reload info
+            plugin.getLogger().info("Configuration reloaded by " + sender.getName());
+            plugin.getLogger().info("Active provider: " + plugin.getConfigManager().getEnabledProviderName());
+            
+        } catch (Exception e) {
+            String errorMsg = "Error reloading configuration: " + e.getMessage();
+            if (sender instanceof Player) {
+                MessageUtils.sendError((Player) sender, errorMsg);
+            } else {
+                sender.sendMessage(errorMsg);
+            }
+            plugin.getLogger().severe("Error reloading configuration: " + e.getMessage());
+            e.printStackTrace();
         }
         
         return true;

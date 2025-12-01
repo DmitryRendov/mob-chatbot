@@ -6,7 +6,7 @@
 
     <groupId>me.drendov.MOBChatBot</groupId>
     <artifactId>mob-chatbot</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <name>mob-chatbot</name>
     <description>Another LLM Chat Bot for your private Minecraft server</description>
     <url>https://github.com/DmitryRendov/mob-chatbot</url>
