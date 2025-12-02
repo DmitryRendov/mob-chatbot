@@ -1,5 +1,7 @@
 package me.drendov.MOBChatBot;
 
+import me.drendov.MOBChatBot.ai.AIProvider;
+import me.drendov.MOBChatBot.ai.AIProviderFactory;
 import me.drendov.MOBChatBot.commands.ChatCommand;
 import me.drendov.MOBChatBot.commands.ReloadCommand;
 import me.drendov.MOBChatBot.config.ConfigManager;
@@ -12,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class MOBChatBot extends JavaPlugin {
     
     private ConfigManager configManager;
+    private AIProvider aiProvider;
 
     @Override
     public void onEnable() {
@@ -24,11 +27,11 @@ public class MOBChatBot extends JavaPlugin {
         configManager = new ConfigManager(this);
         configManager.loadConfig();
         
+        // Initialize AI provider
+        initializeAIProvider();
+        
         // Register commands
         registerCommands();
-        
-        // TODO: Initialize AI providers
-        // TODO: Register event listeners
         
         getLogger().info("MOBChatBot has been enabled successfully!");
     }
@@ -39,10 +42,42 @@ public class MOBChatBot extends JavaPlugin {
         getLogger().info("MOBChatBot is shutting down...");
         getLogger().info("========================================");
         
-        // TODO: Save any pending data
-        // TODO: Cleanup AI provider connections
+        // Cleanup AI provider connections
+        if (aiProvider != null) {
+            aiProvider.shutdown();
+            aiProvider = null;
+        }
         
         getLogger().info("MOBChatBot has been disabled successfully!");
+    }
+    
+    /**
+     * Initialize the AI provider based on configuration
+     */
+    private void initializeAIProvider() {
+        AIProviderFactory factory = new AIProviderFactory(getLogger(), configManager);
+        aiProvider = factory.createProvider();
+        
+        if (aiProvider != null) {
+            getLogger().info("AI Provider initialized: " + aiProvider.getProviderName());
+        } else {
+            getLogger().severe("Failed to initialize any AI provider!");
+            getLogger().severe("Please check your configuration and enable at least one provider.");
+        }
+    }
+    
+    /**
+     * Reinitialize the AI provider (used after config reload)
+     */
+    public void reinitializeAIProvider() {
+        // Shutdown existing provider
+        if (aiProvider != null) {
+            aiProvider.shutdown();
+            aiProvider = null;
+        }
+        
+        // Initialize new provider
+        initializeAIProvider();
     }
     
     /**
@@ -59,5 +94,12 @@ public class MOBChatBot extends JavaPlugin {
      */
     public ConfigManager getConfigManager() {
         return configManager;
+    }
+    
+    /**
+     * Get the AI provider
+     */
+    public AIProvider getAIProvider() {
+        return aiProvider;
     }
 }

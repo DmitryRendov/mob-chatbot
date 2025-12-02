@@ -34,6 +34,9 @@ public class ReloadCommand implements CommandExecutor {
             // Reload configuration
             plugin.getConfigManager().reloadConfig();
             
+            // Reinitialize AI provider with new config
+            plugin.reinitializeAIProvider();
+            
             String message = "Configuration reloaded successfully!";
             if (sender instanceof Player) {
                 MessageUtils.sendSuccess((Player) sender, message);
@@ -43,7 +46,11 @@ public class ReloadCommand implements CommandExecutor {
             
             // Log reload info
             plugin.getLogger().info("Configuration reloaded by " + sender.getName());
-            plugin.getLogger().info("Active provider: " + plugin.getConfigManager().getEnabledProviderName());
+            if (plugin.getAIProvider() != null) {
+                plugin.getLogger().info("Active provider: " + plugin.getAIProvider().getProviderName());
+            } else {
+                plugin.getLogger().warning("No AI provider is active!");
+            }
             
         } catch (Exception e) {
             String errorMsg = "Error reloading configuration: " + e.getMessage();

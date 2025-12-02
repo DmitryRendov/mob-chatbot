@@ -6,7 +6,7 @@
 
     <groupId>me.drendov.MOBChatBot</groupId>
     <artifactId>mob-chatbot</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <name>mob-chatbot</name>
     <description>Another LLM Chat Bot for your private Minecraft server</description>
     <url>https://github.com/DmitryRendov/mob-chatbot</url>
@@ -30,6 +30,27 @@
             <artifactId>spigot-api</artifactId>
             <version>1.21.10-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        
+        <!-- OkHttp for OpenAI API calls -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.12.0</version>
+        </dependency>
+        
+        <!-- Gson for JSON parsing -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+        
+        <!-- AWS SDK for Bedrock Runtime -->
+        <dependency>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>bedrockruntime</artifactId>
+            <version>2.21.0</version>
         </dependency>
     </dependencies>
 
