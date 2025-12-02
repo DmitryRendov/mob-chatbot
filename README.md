@@ -2,33 +2,45 @@
 
 AI-powered chat bot for private Minecraft servers. Provides private conversations with AI assistants using multiple provider backends.
 
-## Current Status: Phase 2 Complete ✅
+## Current Status: Phase 3 Complete ✅
 
 ### Phase 1: Initial Plugin Structure ✅
-- ✅ Main plugin class (`MOBChatBot`) extending JavaPlugin
-- ✅ Proper `onEnable()` and `onDisable()` lifecycle methods with logging
+- ✅ Main plugin class with lifecycle management
 - ✅ Package structure: `commands`, `config`, `ai`, `utils`
 - ✅ Maven build configuration with Spigot API 1.21.10
 - ✅ Basic commands and permissions
-- ✅ Message formatting utilities
 
 ### Phase 2: Configuration System ✅
 - ✅ **ConfigManager** - Full implementation with validation
-- ✅ **config.yml** - Structured configuration with sections:
-  - `ai-providers` - OpenAI, Bedrock, Ollama with enabled/disabled flags
-  - `general` - Max messages per player, cooldown, bot settings
-  - `messages` - Customizable message templates
-- ✅ **Auto-generation** - Default config created on first run
-- ✅ **Validation** - Configuration validation with warnings
-- ✅ **Hot-reload** - `/mobchatreload` command fully functional
-- ✅ **Getters** - Type-safe access to all configuration values
+- ✅ **config.yml** - Structured configuration
+- ✅ **Auto-generation** - Default config on first run
+- ✅ **Hot-reload** - `/mobchatreload` command functional
 
-**Configuration Features:**
-- OpenAI: api-key, model (gpt-3.5-turbo), max-tokens (150)
-- Bedrock: region, access-key, secret-key, model (claude-3-haiku)
-- Ollama: base-url (http://localhost:11434), model (llama2)
-- General: max-messages-per-player (10), cooldown-seconds (5)
-- Provider validation and warnings for missing credentials
+### Phase 3: AI Provider Integration ✅
+- ✅ **AIProvider Interface** - Abstraction for multiple AI backends
+  - `sendMessage()` - Async CompletableFuture-based API
+  - `isConfigured()` - Configuration validation
+  - `initialize()` / `shutdown()` - Lifecycle management
+- ✅ **AIResponse** - Response wrapper with content, token usage, success status
+- ✅ **ConversationMessage** - Message history tracking
+- ✅ **AIProviderFactory** - Factory pattern for provider creation
+- ✅ **OpenAIProvider** - Full OpenAI Chat Completions API integration
+  - OkHttp client for HTTP requests
+  - JSON request/response handling with Gson
+  - Error handling for rate limits, auth errors, service issues
+  - Token usage tracking
+- ✅ **BedrockProvider** - AWS Bedrock Runtime integration
+  - AWS SDK for Java (Bedrock Runtime)
+  - Claude-3-Haiku model support
+  - AWS credentials management
+  - Throttling and quota exception handling
+- ✅ **ChatCommand** - Fully functional with async AI calls
+- ✅ **Integration** - AI provider initialized on startup and config reload
+
+**Dependencies Added:**
+- OkHttp 4.12.0 - HTTP client for OpenAI API
+- Gson 2.10.1 - JSON parsing
+- AWS SDK Bedrock Runtime 2.21.0 - Bedrock integration
 
 **Commands:**
 - `/mobchat <message>` - Send message to AI bot (aliases: `/mc`, `/chatbot`)
@@ -50,22 +62,16 @@ AI-powered chat bot for private Minecraft servers. Provides private conversation
 mvn clean package
 ```
 
-**Output:** `target/mob-chatbot-0.1.0.jar`
+**Output:** `target/mob-chatbot-0.3.0.jar` (13MB with dependencies)
 
 **Installation:**
-Copy `mob-chatbot-0.1.0.jar` to your server's `plugins/` folder.
+Copy `mob-chatbot-0.3.0.jar` to your server's `plugins/` folder.
 
 ## Planned Features
 
-### Phase 3: AI Provider Implementation (Next)
-- OpenAI integration with HTTP client
-- AWS Bedrock support
-- Ollama local model support
-- Provider factory pattern
-- Error handling and retry logic
-
-### Phase 4: Conversation Management
-- Per-player conversation tracking
+### Phase 4: Conversation Management (Next)
+- Per-player conversation tracking with ConversationManager
+- Message history persistence
 - Message history storage
 - Token counting and limits
 - Context window management
